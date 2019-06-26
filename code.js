@@ -100,12 +100,22 @@ function processItem(item, listCounters, images) {
           || gt === DocumentApp.GlyphType.HOLLOW_BULLET
           || gt === DocumentApp.GlyphType.SQUARE_BULLET) {
         prefix = '<ul><li>', suffix = "</li>";
-
-          suffix += "</ul>";
-        }
+      }
       else {
         // Ordered list (<ol>):
-        prefix = "<ol><li>", suffix = "</li>";
+        if (gt === DocumentApp.GlyphType.NUMBER) {            
+            prefix = '<ol type="number"><li>', suffix = "</li>";
+        } else if (gt === DocumentApp.GlyphType.LATIN_UPPER) {            
+            prefix = '<ol type="A"><li>', suffix = "</li>";
+        } else if (gt === DocumentApp.GlyphType.LATIN_LOWER) {            
+            prefix = '<ol type="a"><li>', suffix = "</li>";
+        } else if (gt === DocumentApp.GlyphType.ROMAN_UPPER) {            
+            prefix = '<ol type="I"><li>', suffix = "</li>";
+        } else if (gt === DocumentApp.GlyphType.ROMAN_LOWER) {            
+            prefix = '<ol type="i"><li>', suffix = "</li>";
+        } else {
+            prefix = "<ol><li>", suffix = "</li>";
+        }
       }
     }
     else {
